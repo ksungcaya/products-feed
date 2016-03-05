@@ -1,0 +1,22 @@
+// Core variables and mixins
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+// Reset and dependencies
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/print";
+
+// Core CSS
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/type";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+
+// Components
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+
+// Utility classes
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "resources/assets/bower/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";

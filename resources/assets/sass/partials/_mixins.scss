@@ -1,0 +1,29 @@
+@mixin has($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+@mixin variant($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+
+@mixin hinttext {
+    & ::-webkit-input-placeholder {
+        @content;
+    }
+
+    & :-moz-input-placeholder {
+        @content;
+    }
+
+    & ::-moz-input-placeholder {
+        @content;
+    }
+
+    & :-ms-input-placeholder {
+        @content;
+    }
+}
