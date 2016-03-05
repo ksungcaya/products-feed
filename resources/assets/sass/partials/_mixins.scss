@@ -1,3 +1,17 @@
+// Devices media queries
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+// BEM
 @mixin has($element) {
   &__#{$element} {
     @content;
@@ -10,6 +24,7 @@
   }
 }
 
+// Placeholder
 @mixin hinttext {
     & ::-webkit-input-placeholder {
         @content;

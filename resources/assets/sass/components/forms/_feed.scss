@@ -1,0 +1,27 @@
+.form__feed {
+    
+    display: block;
+    margin-top: 10em;
+    
+    @include has(header) {
+        font: {
+            family: $font-lato;
+            size: 2em;
+        }
+        margin-bottom: .5em;
+    }
+
+    @include has(text) {
+        height: 45px;
+        color: #999;
+        font-size: 1.5em;
+    }
+
+    @include has(btn) {
+        font: {
+            size: 1.5em;
+            weight: 300;
+        }
+        padding: .2em 1em;
+    }
+}
