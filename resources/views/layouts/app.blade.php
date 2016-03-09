@@ -20,7 +20,8 @@
     </head>
     <body>
 
-        @yield ('content')
-
+        @yield('content')
+        
+        @section('scripts')
     </body>
 </html>
