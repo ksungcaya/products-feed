@@ -6,4 +6,8 @@ var paths = {
 
 elixir(function(mix) {
     mix.sass('main.scss');
+
+    mix.scripts([
+        '../bower/jquery/dist/jquery.js'
+    ], 'public/js/main.js');
 });
