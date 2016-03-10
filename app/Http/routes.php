@@ -2,18 +2,42 @@
 
 /*
 |--------------------------------------------------------------------------
-| Routes File
+| Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
 |
 */
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', function () {
-        return view('index');
-    });
+    Route::get('/', 'ProductsController@index');
+
+    Route::post('/products/feed', 'ProductsController@feed');
+
+    // ToDo
+    // Route::get('/products/feed/{directory}', 'ProductsFeedController@directory');
+});
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "api" middleware group to every route
+| it contains. The "api" middleware group is defined in your HTTP
+| kernel and includes request throttling.
+|
+*/
+
+Route::group(['middleware' => ['api']], function () {
+
+    Route::post('/products/feed/process', [
+        'as'   => 'products.feed.process',
+        'uses' => 'ProductsFeedController@process'
+    ])->middleware('no-timeout');
+
+    Route::post('/products/feed/display', 'ProductsFeedController@display');
 });
