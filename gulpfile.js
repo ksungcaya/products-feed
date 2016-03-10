@@ -8,6 +8,7 @@ elixir(function(mix) {
     mix.sass('main.scss');
 
     mix.scripts([
-        '../bower/jquery/dist/jquery.js'
+        '../bower/jquery/dist/jquery.js',
+        'feed.js'
     ], 'public/js/main.js');
 });
