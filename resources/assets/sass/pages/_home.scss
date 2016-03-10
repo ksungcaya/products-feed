@@ -1,12 +1,16 @@
 .form-center {
-    width: 90%;
     margin: {
+        top: 11em;
         left: auto;
         right: auto;
     }
     text-align: center;
 
+    @include tablet {
+        width: 100%;
+    }
+
     @include desktop {
-        width: 50%;
+        width: 700px;
     }
 }

@@ -1,0 +1,75 @@
+.masthead {
+    width: 100%;
+    position: relative;
+    background-color: $main-color;
+    z-index: 1000;
+}
+
+.masthead__inner {
+    padding: 30px 30px 20px;
+    margin: auto;
+    text-align: center;
+}
+
+.masthead__brand {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    a {
+        color: #fff;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    @include tablet {
+        float: left;
+    }
+}
+
+.masthead__nav > li {
+    display: inline-block;
+}
+
+.masthead__nav > li + li {
+    margin-left: 20px;
+}
+
+.masthead__nav > li > a {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff; /* IE8 proofing */
+    color: rgba(255,255,255,.75);
+    border-bottom: 2px solid transparent;
+}
+
+.masthead__nav > li > a:hover,
+.masthead__nav > li > a:focus {
+    background-color: transparent;
+    border-bottom-color: #a9a9a9;
+    border-bottom-color: rgba(255,255,255,.25);
+}
+
+.masthead__nav > .active > a,
+.masthead__nav > .active > a:hover,
+.masthead__nav > .active > a:focus {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+@include tablet {
+    .masthead {
+        @include has(nav) {
+            float: right;
+        }
+    }
+}
+
+@include desktop {
+    .masthead__inner {
+        width: 900px;
+    }
+}

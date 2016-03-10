@@ -1,14 +1,18 @@
 // Typography
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700eax);
 
+@import "./bootstrap";
+
 // Core
 @import "./partials/variables";
 @import "./partials/mixins";
 @import "./partials/overrides";
 @import "./partials/utilities";
 
-@import "./bootstrap";
-
 // App components
-@import "./components/form";
+@import "./pages/home";
+@import "./components/masthead";
 @import "./components/forms/feed";
+@import "./pages/feed";
+@import "./components/product";
+@import "./components/loader";

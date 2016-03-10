@@ -1,0 +1,43 @@
+.product {
+    border-radius: 3px;
+    background-color: $product-background-color;
+    border: 1px solid $product-color;
+    border-bottom-color: #CBCCC9;
+    margin: 20px auto 0;
+    max-width: 240px;
+    text-shadow: none;
+    color: $main-color;
+
+    @include has(image) {
+        margin: 0;
+        width: 100%;
+        display: block;
+        color: $product-color;
+        border-bottom: 1px solid;
+    }
+
+    @include has(meta) {
+        margin: 6px;
+        @extend %ellipsis;
+        text-align: left;
+    }
+
+    @include has(name) {
+        display: block;
+        font-size: 1em;
+        margin-bottom: 3px;
+        @extend %ellipsis;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    @include has(price) {
+        font-size: 13px;
+    }
+
+    @include has(categories) {
+        @extend .product__price;
+    }
+}

@@ -19,9 +19,14 @@
         <![endif]-->
     </head>
     <body>
-
-        @yield('content')
+    
+        @include('layouts.nav')
+        
+        <div class="container">
+            @yield('content')
+        </div>
         
         @section('scripts')
+        @show
     </body>
 </html>

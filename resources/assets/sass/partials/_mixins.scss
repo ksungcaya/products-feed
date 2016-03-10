@@ -1,6 +1,6 @@
 // Devices media queries
 @mixin tablet {
-  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+  @media (min-width: #{$tablet-width}) {
     @content;
   }
 }
@@ -10,6 +10,7 @@
     @content;
   }
 }
+
 
 // BEM
 @mixin has($element) {
