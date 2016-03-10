@@ -180,14 +180,13 @@
 
             if ( ! error) {
                 error = this.error = $('<span/>', { 
-                    text: message,
                     class: 'feed__error'
                 });
 
                 this.feedContainer.append(error);
             }
 
-            error.hide().fadeIn(100);
+            error.hide().text(message).fadeIn(100);
         },
 
         hideError: function() {
