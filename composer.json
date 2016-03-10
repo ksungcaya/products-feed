@@ -6,7 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "prewk/xml-string-streamer-guzzle": "^0.1.0",
+        "verdant/xml2array": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
