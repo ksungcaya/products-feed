@@ -45,6 +45,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof \App\Exceptions\FeedDirectoryException)
+        {
+            return response()->json([
+                'error' => [
+                    'message' => $e->getMessage()
+                ]
+            ]);
+        }
+
         return parent::render($request, $e);
     }
 }
