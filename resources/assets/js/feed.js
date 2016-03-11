@@ -17,7 +17,17 @@
             this.loader = $('.loader');
             this.error = null;
 
+            this.bindEvents();
+
             return this;
+        },
+
+        bindEvents: function() {
+            $(window).bind('beforeunload', $.proxy(function() {
+                if ( ! this.feedRequest.done) {
+                    return 'Feed is still processing, do you really want to leave the page?';
+                }
+            }, this));
         },
 
         process: function() {
@@ -31,6 +41,7 @@
             this.toggleLoading(false);
 
             if (data.error) {
+                this.feedRequest.done = true;
                 return this.showError(data.error.message);
             }
 

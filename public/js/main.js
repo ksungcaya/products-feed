@@ -9849,7 +9849,17 @@ return jQuery;
             this.loader = $('.loader');
             this.error = null;
 
+            this.bindEvents();
+
             return this;
+        },
+
+        bindEvents: function() {
+            $(window).bind('beforeunload', $.proxy(function() {
+                if ( ! this.feedRequest.done) {
+                    return 'Feed is still processing, do you really want to leave the page?';
+                }
+            }, this));
         },
 
         process: function() {
@@ -9863,6 +9873,7 @@ return jQuery;
             this.toggleLoading(false);
 
             if (data.error) {
+                this.feedRequest.done = true;
                 return this.showError(data.error.message);
             }
 
@@ -10012,14 +10023,13 @@ return jQuery;
 
             if ( ! error) {
                 error = this.error = $('<span/>', { 
-                    text: message,
                     class: 'feed__error'
                 });
 
                 this.feedContainer.append(error);
             }
 
-            error.hide().fadeIn(100);
+            error.hide().text(message).fadeIn(100);
         },
 
         hideError: function() {
