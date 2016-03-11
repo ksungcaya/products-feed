@@ -113,7 +113,7 @@
         productHtml: function(product) {
             var categories = 'N/A';
             var html = '<div class="col-sm-6 col-xs-12 col-md-3">' + "\n" +
-                       '    <div class="product data-set="'+ this.feedData.page +'">'+ "\n" +
+                       '    <div class="product data-set="'+ this.feedData.page +'" data-id="'+ product.productId +'">'+ "\n" +
                        '       <a href="'+ product.productUrl +'" class="product__link" target="__blank" title="'+ product.name +'">'+ "\n" +
                        '            <img src="'+ product.imageUrl +'" alt="'+ product.name +'" class="product__image">'+ "\n" +
                        '        </a>'+ "\n" +
