@@ -98,6 +98,7 @@ abstract class XmlFeedReader
     public function createTempDirectory($name = '')
     {
         $name = $name ?: $this->generateName();
+        $path = 'root';
         $path = $this->feedPath($name);
 
         if (! File::exists($path)) {
@@ -191,11 +192,17 @@ abstract class XmlFeedReader
     {
         $directory = $this->feedDirectory;
 
-        if (! $directory) {
+        if (is_null($directory)) {
             throw new FeedDirectoryException('No feed directory provided.');
         }
 
-        return $this->feedPath($directory);
+        $path = $this->feedPath($directory);
+
+        if (! File::exists($path)) {
+            throw new FeedDirectoryException('Feed directory does not exist.');
+        }
+
+        return $path;
     }
 
     /**
@@ -205,7 +212,7 @@ abstract class XmlFeedReader
      *
      * @return array
      */
-    abstract protected function createPayloadFrom($node);
+    protected abstract function createPayloadFrom($node);
 
     /**
      * Create a streamer instance.
