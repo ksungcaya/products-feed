@@ -15,7 +15,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', 'ProductsController@index');
 
-    Route::post('/products/feed', 'ProductsController@feed');
+    Route::get('/products/feed', 'ProductsController@feed');
 
     // ToDo
     // Route::get('/products/feed/{directory}', 'ProductsFeedController@directory');

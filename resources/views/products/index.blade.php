@@ -6,10 +6,8 @@
 
         <h2 class="form__feed__header">Enter feed url:</h2>
 
-        <form action="/products/feed" method="POST">
+        <form action="/products/feed" method="GET">
 
-            {!! csrf_field() !!}
-            
             <div class="form-group">
                 <input 
                     type="url"
