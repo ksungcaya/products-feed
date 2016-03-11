@@ -1,6 +1,12 @@
 <?php
 
+use Prewk\XmlStringStreamer;
+use org\bovigo\vfs\vfsStream;
 use App\Http\Feed\ProductsFeed;
+use org\bovigo\vfs\vfsStreamWrapper;
+use App\Exceptions\FeedDirectoryException;
+use Prewk\XmlStringStreamer\Stream\Guzzle;
+use Prewk\XmlStringStreamer\Parser\UniqueNode;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -22,7 +28,7 @@ class ProductsFeedTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -30,8 +36,8 @@ class ProductsFeedTest extends TestCase
     }
 
     /** 
-     * @vcr feed.yaml
      * @test
+     * @vcr feed.yaml
      */
     public function it_validates_a_feed_url()
     {
@@ -40,6 +46,7 @@ class ProductsFeedTest extends TestCase
         $invalid = $this->productsFeed->isValidUrl($invalidUrl);
         $this->assertFalse($invalid);
 
+        // sorry twitter you're invalid :P
         $invalidUrl2 = 'http://twitter.com';
 
         $invalid2 = $this->productsFeed->isValidUrl($invalidUrl2);
@@ -48,4 +55,28 @@ class ProductsFeedTest extends TestCase
         $valid = $this->productsFeed->isValidUrl($this->feedUrl);
         $this->assertTrue($valid);
     }
+
+    /** 
+     * @test
+     * @vcr products.yaml
+     * @expectedException \App\Exceptions\FeedDirectoryException
+     */
+    public function it_throws_a_feed_directory_exception_if_the_directory_provided_does_not_exists()
+    {
+        $this->productsFeed->setFeedDirectory('some-random-directory')
+                           ->processFromUrl($this->feedUrl);
+    }
+
+    /** 
+     * The reader should set a feed directory first before processing the feed.
+     * 
+     * @test
+     * @vcr products.yaml
+     * @expectedException \App\Exceptions\FeedDirectoryException
+     */
+    public function it_throws_a_feed_directory_exception_if_the_directory_was_not_set_first()
+    {
+        $this->productsFeed->processFromUrl($this->feedUrl);
+    }
+
 }

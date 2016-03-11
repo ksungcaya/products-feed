@@ -5,21 +5,12 @@ namespace App\Http\Feed;
 use File;
 use XMLReader;
 use Verdant\XML2Array;
-use Prewk\XmlStringStreamer;
+use App\Http\Feed\XmlFeedStream;
 use App\Exceptions\FeedDirectoryException;
-use Prewk\XmlStringStreamer\Stream\Guzzle;
-use Prewk\XmlStringStreamer\Parser\UniqueNode;
 use App\Exceptions\MissingNodeToExtractException;
 
 abstract class XmlFeedReader
 {
-    /**
-     * The size in bytes to be streamed at a time.
-     *
-     * @var integer
-     */
-    protected $chunkSize = 4096;
-
     /**
      * The counter for the set that was processed.
      *
@@ -42,6 +33,21 @@ abstract class XmlFeedReader
     protected $feedDirectory;
 
     /**
+     * @var \App\Http\Feed\XmlFeedStream
+     */
+    protected $stream;
+   
+    /**
+     * Create XmlFeedReader instance.
+     *
+     * @param XmlFeedStream $stream
+     */
+    public function __construct(XmlFeedStream $stream)
+    {
+        $this->stream = $stream;
+    }
+
+    /**
      * Attempt to validate the feed url.
      *
      * @param  string  $url
@@ -50,7 +56,7 @@ abstract class XmlFeedReader
      */
     public function isValidUrl($url)
     {
-        $stream = $this->createGuzzleStream($url);
+        $stream = $this->stream->createGuzzleStream($url);
         $chunk = trim($stream->getChunk());
 
         if ( ! $chunk) return false;
@@ -67,7 +73,7 @@ abstract class XmlFeedReader
      */
     public function processFromUrl($url)
     {
-        $streamer = $this->createStreamer($url);
+        $streamer = $this->stream->createStreamer($url, $this->getNodeToExtract());
         $dataCounter = 0;
         $data = [];
 
@@ -98,12 +104,13 @@ abstract class XmlFeedReader
     public function createTempDirectory($name = '')
     {
         $name = $name ?: $this->generateName();
-        $path = 'root';
         $path = $this->feedPath($name);
 
         if (! File::exists($path)) {
             File::makeDirectory($path, 0755, true);
         }
+
+        File::cleanDirectory($path);
 
         return $name;
     }
@@ -120,6 +127,16 @@ abstract class XmlFeedReader
         $this->feedDirectory = $directory;
 
         return $this;
+    }
+
+    /**
+     * Feed directory getter.
+     *
+     * @return string
+     */
+    public function getFeedDirectory()
+    {
+        return $this->feedDirectory;
     }
 
     /**
@@ -190,7 +207,7 @@ abstract class XmlFeedReader
      */
     protected function getFeedDirectoryPath()
     {
-        $directory = $this->feedDirectory;
+        $directory = $this->getFeedDirectory();
 
         if (is_null($directory)) {
             throw new FeedDirectoryException('No feed directory provided.');
@@ -213,33 +230,6 @@ abstract class XmlFeedReader
      * @return array
      */
     protected abstract function createPayloadFrom($node);
-
-    /**
-     * Create a streamer instance.
-     *
-     * @param  string $url
-     *
-     * @return \Prewk\XmlStringStreamer
-     */
-    protected function createStreamer($url)
-    {
-        $stream = $this->createGuzzleStream($url);
-        $parser = new UniqueNode(["uniqueNode" => $this->getNodeToExtract()]);
-
-        return new XmlStringStreamer($parser, $stream);
-    }
-
-    /**
-     * Create a guzzle stream instance.
-     *
-     * @param  string $url
-     *
-     * @return \Prewk\XmlStringStreamer\Stream\Guzzle
-     */
-    protected function createGuzzleStream($url)
-    {
-        return new Guzzle($url, $this->chunkSize);
-    }
 
     /**
      * A feed should have a name of node to be extracted.

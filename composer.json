@@ -16,7 +16,8 @@
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*",
-        "php-vcr/phpunit-testlistener-vcr": "^1.1"
+        "php-vcr/phpunit-testlistener-vcr": "^1.1",
+        "mikey179/vfsStream": "^1.6"
     },
     "autoload": {
         "classmap": [
