@@ -1,27 +1,50 @@
-# Laravel PHP Framework
+## Products Feed
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+A simple app made with [Laravel Framework](http://laravel.com) that parses an XML products feed from an external source with minimum CPU and memory consumptions.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### Features
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- A form that accepts a valid feed url
+- URL validation
+- Can process large XML files
+- Products feed pagination (load more...)
+- User friendly error messages
+- Single product modal view
 
-## Official Documentation
+### Installation
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+1. Clone the Products Feed repository.
 
-## Contributing
+    ```bash
+    git clone https://github.com/ksungcaya/products-feed.git products-feed
+    ```
+2. Navigate through the folder.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    ```bash
+    cd products-feed
+    ```
+3. Rename the `.env.example` file to `.env`
+4. Please make sure to have [composer](https://getcomposer.org/) installed on your machine and do a `composer install` inside the directory.
+5. Generate an app key.
 
-## Security Vulnerabilities
+    ```bash
+    php artisan key:generate
+    ```
+6. Finally, run `php artisan serve` and navigate through the url that will be shown after running the command.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Tests
+If you want to run the tests, it's very easy. From your terminal, navigate through the app's root directory and run
+```bash
+vendor/bin/phpunit
+```
 
-## License
+and let's hope it passes all the tests. :)
+
+### Todo list
+
+- Add Docker Image
+
+
+### License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
