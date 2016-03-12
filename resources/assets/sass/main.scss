@@ -1,7 +1,10 @@
 // Typography
+// text-shadow: 0 1px 3px rgba(0,0,0,.5);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700eax);
 
+// Vendors
 @import "./bootstrap";
+@import "./remodal";
 
 // Core
 @import "./partials/variables";
@@ -9,10 +12,13 @@
 @import "./partials/overrides";
 @import "./partials/utilities";
 
-// App components
+// Pages
 @import "./pages/home";
-@import "./components/masthead";
-@import "./components/forms/feed";
 @import "./pages/feed";
+
+// App components
+@import "./components/modals/product";
+@import "./components/forms/feed";
+@import "./components/masthead";
 @import "./components/product";
 @import "./components/loader";

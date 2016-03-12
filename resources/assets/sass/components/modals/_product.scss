@@ -1,0 +1,27 @@
+.product__modal {
+    text-align: left;
+
+    @include has(image) {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 5px;
+    }
+
+    @include has(meta) {
+        margin: 10px auto 20px;;
+        font-size: 12px;
+    }
+
+    @include has(categories) {
+        margin-top: 5px;
+    }
+
+    @include has(name) {
+        line-height: 26px;
+        font-size: 24px;
+    }
+
+    @include has(description) {
+        margin-top: 10px;
+    }
+}

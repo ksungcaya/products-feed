@@ -1,12 +1,6 @@
 <?php
 
-use Prewk\XmlStringStreamer;
-use org\bovigo\vfs\vfsStream;
 use App\Http\Feed\ProductsFeed;
-use org\bovigo\vfs\vfsStreamWrapper;
-use App\Exceptions\FeedDirectoryException;
-use Prewk\XmlStringStreamer\Stream\Guzzle;
-use Prewk\XmlStringStreamer\Parser\UniqueNode;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -33,6 +27,44 @@ class ProductsFeedTest extends TestCase
         parent::setUp();
 
         $this->productsFeed = App::make(ProductsFeed::class);
+    }
+
+    /** @test */
+    public function it_gets_a_product_by_product_id()
+    {
+        $productsFeedStub = $this->getMockBuilder(get_class($this->productsFeed))
+                                 ->disableOriginalConstructor()
+                                 ->setMethods(['getPage', 'setFeedDirectory'])
+                                 ->getMock();
+
+
+        $productsFeedStub->expects($this->once())
+                         ->method('getPage')
+                         ->willReturn($this->productsFixture());
+
+        $productsFeedStub->expects($this->once())
+                         ->method('setFeedDirectory')
+                         ->with('existing-dir')
+                         ->willReturn($productsFeedStub);
+
+        $product = $productsFeedStub->setFeedDirectory('existing-dir')
+                                    ->getByProductId('kaspersky lab_kl4861xarfs', 1);
+
+        $this->assertArrayHasKey('productId', $product);
+        $this->assertArrayHasKey('name', $product);
+        $this->assertArrayHasKey('description', $product);
+        $this->assertEquals('kaspersky lab_kl4861xarfs', $product['productId']);
+    }
+
+    /**
+     * Simulate getting products from a file.
+     *
+     * @return array
+     */
+    private function productsFixture()
+    {
+        $path = base_path('tests/fixtures/products');
+        return unserialize(file_get_contents($path));
     }
 
     /** 

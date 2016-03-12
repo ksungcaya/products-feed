@@ -68,4 +68,24 @@ class ProductsFeedController extends Controller
 
         return $this->respond(compact('products', 'feed_directory', 'page'));
     }
+
+    /**
+     * Get a product by its id.
+     *
+     * @param  Request $request
+     *
+     * @return Response
+     */
+    public function displayById(Request $request)
+    {
+        $product = $this->productsFeed
+                        ->setFeedDirectory($request->get('feed_directory'))
+                        ->getByProductId($request->get('product_id'), $request->get('page'));
+
+        if ( ! $product) {
+            return $this->respondWithError("The product does not exist from the feed.\nPlease try again.");
+        }
+
+        return $this->respond($product);
+    }
 }

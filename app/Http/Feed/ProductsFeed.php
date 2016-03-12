@@ -21,6 +21,25 @@ class ProductsFeed extends XmlFeedReader
     protected $limit = 32;
 
     /**
+     * Get a product by its id.
+     *
+     * @param  integer $productId
+     * @param  integer $page
+     *
+     * @return array|bool
+     */
+    public function getByProductId($productId, $page)
+    {
+        if ($products = $this->getPage($page)) {
+            return array_first($products, function ($key, $value) use ($productId) {
+                return $value['productId'] == $productId;
+            });
+        }
+
+        return false;
+    }
+
+    /**
      * Create a product payload from the processed node.
      *
      * @param  string $node

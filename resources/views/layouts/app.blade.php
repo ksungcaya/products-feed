@@ -27,6 +27,7 @@
         </div>
         
         @section('scripts')
+            <script src="/js/vendor.js"></script>
         @show
     </body>
 </html>

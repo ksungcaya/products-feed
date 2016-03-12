@@ -1,6 +1,7 @@
 {
   "name": "Product Feed",
   "devDependencies": {
-    "bootstrap-sass": "bootstrap-sass-official#^3.3.6"
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.6",
+    "remodal": "~1.0.6"
   }
 }

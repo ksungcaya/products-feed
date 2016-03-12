@@ -15,8 +15,11 @@
     </div>
     
     <span class="loader" hidden></span>
+
+    @include('products._product')
 @endsection
 
 @section('scripts')
-    <script src="/js/main.js"></script>
+    @parent
+    <script src="/js/feed.js"></script>
 @endsection

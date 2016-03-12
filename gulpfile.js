@@ -9,6 +9,8 @@ elixir(function(mix) {
 
     mix.scripts([
         '../bower/jquery/dist/jquery.js',
-        'feed.js'
-    ], 'public/js/main.js');
+        '../bower/remodal/dist/remodal.min.js'
+    ], 'public/js/vendor.js');
+
+    mix.scripts(['feed.js'], 'public/js/feed.js');
 });

@@ -40,4 +40,6 @@ Route::group(['middleware' => ['api']], function () {
     ])->middleware('no-timeout');
 
     Route::post('/products/feed/display', 'ProductsFeedController@display');
+
+    Route::post('/products/feed/display/product', 'ProductsFeedController@displayById');
 });

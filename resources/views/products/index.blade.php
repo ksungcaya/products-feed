@@ -15,13 +15,11 @@
                     name="url" 
                     class="form-control form__feed__text" 
                     placeholder="http://example.com" 
-                    value="http://pf.tradetracker.net/?aid=1&type=xml&encoding=utf-8&fid=251713&categoryType=2&additionalType=2&limit=10"
+                    value="http://pf.tradetracker.net/?aid=1&type=xml&encoding=utf-8&fid=251713&categoryType=2&additionalType=2&limit=100"
                 >
             </div>
-            <!--  value="{{ old('url') }}" -->
 
             <button type="submit" class="btn btn-primary form__feed__btn">Submit</button>
         </form>    
     </div>
-
 @endsection
