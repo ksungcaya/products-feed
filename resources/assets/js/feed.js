@@ -40,10 +40,10 @@
 
         processCallback: function(data) {
             var feedData = this.feedData;
-            this.toggleLoading(false);
 
             if (data.error) {
                 this.feedRequest.done = true;
+                this.toggleLoading(false);
                 return this.showError(data.error.message);
             }
 
@@ -52,7 +52,8 @@
                 this.process();
                 return this.getFeedSet(this.onFirstPageLoad);
             }
-
+            
+            this.toggleLoading(false);
             this.feedRequest.done = true;
         },
 
@@ -71,16 +72,18 @@
             var requestDone = this.feedRequest.done,
                 products = data.products;
 
-            this.toggleLoading(false);
-
             if (requestDone && ! products) {
+                this.toggleLoading(false);
                 return this.showError('No feed available from this url.');
             }
 
             if (! requestDone && ! products) {
-                return this.getFeedSet(this.onFirstPageLoad);
+                return setTimeout(function() {
+                    this.getFeedSet(this.onFirstPageLoad);
+                }.bind(this), 5000);
             }
 
+            this.toggleLoading(false);
             this.createProducts(products);
             this.initializePagination();
             this.bindProductEvents();
@@ -197,7 +200,7 @@
                 _this.productModalText.text('Fetching product...');
                 _this.getProductModal().open();
 
-                params.page = $(this).data('set') || _this.feedData.page;
+            params.page = $(this).data('set') || _this.feedData.page;
                 params.product_id = $(this).data('id');
 
                 $.post('/products/feed/display/product', params, $.proxy(_this.onProductFetch, _this));

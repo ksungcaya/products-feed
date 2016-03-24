@@ -2802,7 +2802,7 @@ a:focus {
       width: 700px; } }
 
 .products__feed {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   margin-top: 4em;
   text-align: center; }
   .products__feed__header {
@@ -2813,6 +2813,7 @@ a:focus {
       margin-top: 3em; } }
 
 .feed__error {
+  margin-top: 15px;
   display: block;
   color: #a94442; }
 
