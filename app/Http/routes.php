@@ -32,14 +32,14 @@ Route::group(['middleware' => ['web']], function () {
 |
 */
 
-Route::group(['middleware' => ['api']], function () {
+Route::group(['prefix' => 'products/feed'], function () {
 
-    Route::post('/products/feed/process', [
+    Route::post('process', [
         'as'   => 'products.feed.process',
         'uses' => 'ProductsFeedController@process'
-    ])->middleware('no-timeout');
+    ])->middleware(['api', 'no-timeout']);
 
-    Route::post('/products/feed/display', 'ProductsFeedController@display');
+    Route::post('display', 'ProductsFeedController@display');
 
-    Route::post('/products/feed/display/product', 'ProductsFeedController@displayById');
+    Route::post('display/product', 'ProductsFeedController@displayById');
 });
